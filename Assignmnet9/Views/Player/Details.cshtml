@@ -1,0 +1,117 @@
+﻿@model Assignmnet9.Controllers.PlayerWithDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for Player: @Model.Name</h2>
+
+<div>
+    <h4>Currently Plays For Team: @Model.TeamName</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+                Jersey Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <br />
+
+        <dt>
+            Games Played
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GamesPlayed)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Goals)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Goals)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assists)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assists)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+        <br />
+
+        <dt>
+            Player Profile
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @if (Model.Profile.IsEmpty())
+                {
+                    <span>(Profile not found)</span>
+                }
+                else
+                {
+                    @Html.Raw(Model.Profile)
+                }
+            </div>
+        </dd>
+
+        <br />
+
+        <dt>
+            Picture of Player
+        </dt>
+
+        <dd>
+            @{ var alt = "No player photo found"; }
+            <img src="~/playerPhoto/@Model.PlayerId" alt="@alt" title="@alt" class="img-responsive" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PlayerId }) |
+    @Html.ActionLink("Delete Player", "Delete", new { id = Model.PlayerId}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

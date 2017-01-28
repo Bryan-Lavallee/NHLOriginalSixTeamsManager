@@ -1,0 +1,94 @@
+﻿@model Assignmnet9.Controllers.CoachWithDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details for Coach: @Model.Name</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WinPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WinPercentage)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfGamesCoached)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfGamesCoached)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearsCoached)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearsCoached)
+        </dd>
+
+        <br />
+
+        <dt>
+            Coach Profile
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @if (Model.CoachProfile.IsEmpty())
+                {
+                    <span>(Coach Profile not found)</span>
+                }
+                else
+                {
+                    @Html.Raw(Model.CoachProfile)
+                }
+            </div>
+        </dd>
+
+        <br />
+
+        <dt>
+            Picture of Coach
+        </dt>
+
+        <dd>
+            @{ var alt = "No player photo found"; }
+            <img src="~/coachPhoto/@Model.CoachId" alt="@alt" title="@alt" class="img-responsive" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CoachId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

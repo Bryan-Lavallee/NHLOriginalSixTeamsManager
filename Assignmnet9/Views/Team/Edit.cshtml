@@ -1,0 +1,126 @@
+﻿@model Assignmnet9.Controllers.TeamEditForm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Team: @Model.TeamName</h2>
+
+<script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>When finished editing, please press the save button at the bottom</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TeamId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TeamName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Division, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Division, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Division, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Wins, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Wins, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Wins, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Loss, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Loss, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Loss, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Points, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Points, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.History, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.History, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.History, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <script>CKEDITOR.replace('History');</script>
+
+        <script src="~/Scripts/App/core.js"></script>
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <h4>Filter by Position</h4>
+                <div class="row">
+                    @foreach (var item in Model.PositionList)
+                    {
+                        <div class="checkbox col-md-3">
+                            <label><input type="checkbox" names="Position" value="@item.PositionId" onchange="togglePosition('p' + '@item.PositionId', this.checked);"/>@item.PositionName</label>
+                        </div>
+                    }
+
+                </div>
+                <p>&nbsp;</p>
+
+                <h4>Player Names</h4>
+
+                @foreach (var item in Model.PlayerList)
+                {
+                    <div class="checkbox p@(item.PositionId)" style="display : none;">
+                        <label><input type="checkbox" name="PlayerIds" value="@item.PlayerId" checked="@item.Selected" />@item.Name, @item.Points</label> <br />
+                    </div>
+                }
+                
+            </div>
+           
+             <div class="col-md-4 well well-lg">
+                <h4>Now on Team <span class="badge">@Model.PlayersOnTeamList.Count()</span></h4>
+
+                @foreach (var item in Model.PlayersOnTeamList)
+                {
+                    @item.Name
+                    <br />
+                }
+            </div>
+        </div>
+
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Save changes" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

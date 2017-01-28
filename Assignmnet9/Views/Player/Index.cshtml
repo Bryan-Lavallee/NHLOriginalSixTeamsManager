@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Assignmnet9.Controllers.PlayerBase>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of All Players for Season @DateTime.Now.AddYears(-1).Year/@DateTime.Now.Year</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Jersey Number
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Games Played
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Goals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assists)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GamesPlayed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Goals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assists)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Points)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PlayerId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PlayerId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PlayerId })
+        </td>
+    </tr>
+}
+
+</table>

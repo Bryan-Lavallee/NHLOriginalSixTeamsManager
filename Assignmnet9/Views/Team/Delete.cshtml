@@ -1,0 +1,111 @@
+﻿@model Assignmnet9.Controllers.TeamWithDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Team: @Model.TeamName</h2>
+
+<div>
+    <h4>If you are sure you wish to delete this team; press the delete button.</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Team Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Division)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wins)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wins)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loss)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.History)
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @if (Model.History.IsEmpty())
+                {
+                    <span>(History not found)</span>
+                }
+                else
+                {
+                    @Html.Raw(Model.History)
+                }
+            </div>
+        </dd>
+
+        <br />
+
+        <dt>
+            List of Players
+        </dt>
+
+        <dd>
+            @if (Model.Players.Count == 0)
+            {
+                <span>(none)</span>
+            }
+            else
+            {
+                foreach (var item in Model.Players)
+                {
+                    <span>@item.Name</span> <br />
+                }
+            }
+            <hr />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Assignmnet9.Controllers.PlayerBase>
+
+
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Currently Playing For Team
+        </th>
+        <th>
+            Select to Trade
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                <label><input type="checkbox" name="PlayerIds" value="@item.PlayerId"/></label>
+            </td>
+        </tr>
+    }
+
+</table>

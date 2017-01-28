@@ -1,0 +1,198 @@
+﻿@model Assignmnet9.Controllers.TeamWithMediaInfo
+
+@{
+    ViewBag.Title = "DetailsWithMediaItems";
+}
+
+<h2>Team: @Model.TeamName details with Media Items</h2>
+
+<div>
+    <h4>Information about team along with their media items</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Team Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Division)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Division)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Wins)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Wins)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loss)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loss)
+        </dd>
+
+        <br />
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+        <br />
+
+        <dt>
+            Team History
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @if (Model.History.IsEmpty())
+                {
+                    <span>(History not found)</span>
+                }
+                else
+                {
+                    @Html.Raw(Model.History)
+                }
+            </div>
+        </dd>
+
+        <br />
+
+        <dt>
+            Team Photos
+        </dt>
+
+        <dd>
+            @if(Model.MediaItems.Count() == 0)
+            {
+                <span>No Items Found</span>
+            }
+            else
+            {
+                foreach (var item in Model.MediaItems.Where(m => m.ContentType.Contains("image/")))
+                {
+                    <div>
+                        <span>@item.Caption</span><br>
+                        <img src="~/mediaItem/@item.StringId" alt="@item.Caption" title="@item.Caption" width="200">
+                    </div>
+                }
+            }
+            <hr>
+        </dd>
+        
+        <br />
+
+        <dt>
+            Team Documents
+        </dt>
+
+        <dd>
+            @if (Model.MediaItems.Count() == 0)
+            {
+                <span>No Items Found</span>
+            }
+            else
+            {
+                foreach (var item in Model.MediaItems.Where(m => m.ContentType.Contains("application/")))
+                {
+                    <div>
+                        @{ var alt = $"{Model.TeamName}";}
+                        @if (item.ContentType.Contains("word"))
+                    {
+                            <span>@item.Caption</span><br />
+                            <a href="~/mediaItem/@item.StringId"><img src="~/Content/Images/icon-word.png" title="File to Download" /></a>
+                        }
+                        else if (item.ContentType.Contains("pdf"))
+                        {
+                            <span>@item.Caption</span><br />
+                            <a href="~/mediaItem/@item.StringId"><img src="~/Content/Images/icon-pdf.png" title="File to Download" /></a>
+                        }
+                        else if (item.ContentType.Contains("spreadsheet"))
+                        {
+                            <span>@item.Caption</span><br />
+                            <a href="~/mediaItem/@item.StringId"><img src="~/Content/Images/icon-excel.png" title="File to Download" /></a>
+                        }
+                        else
+                        {
+                            <a href="~/mediaItem/@item.StringId">@item.Caption</a>
+                        }
+
+                    </div>
+                  }
+             }
+           
+            <hr>
+        </dd>
+
+        <br />
+
+        <dt>
+            List of Coaches
+        </dt>
+
+        <dd>
+            @if (Model.Coaches.Count() == 0)
+            {
+                <span>(none)</span>
+            }
+            else
+            {
+                foreach (var item in Model.Coaches)
+                {
+                    <span>@item.Name</span> <br />
+                }
+            }
+            <hr />
+        </dd>
+
+        <br />
+
+        <dt>
+            List of Players
+        </dt>
+
+        <dd>
+            @if (Model.Players.Count == 0)
+            {
+                <span>(none)</span>
+            }
+            else
+            {
+                foreach (var item in Model.Players)
+                {
+                    <span>@item.Name</span> <br />
+                }
+            }
+            <hr />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Add New Player for this Team", "AddPlayer") |
+    @Html.ActionLink("Add New Coach for this Team", "AddCoach") |
+    @Html.ActionLink("Add New Media Item for this team", "AddMediaItem") |
+    @Html.ActionLink("Back to List", "Index")
+</p>

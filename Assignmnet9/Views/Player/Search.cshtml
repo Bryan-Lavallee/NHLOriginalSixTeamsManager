@@ -1,0 +1,45 @@
+﻿@model Assignmnet9.Controllers.PlayerSearchForm
+
+
+<h2>Search Player Collection</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Enter all or part of player name, player position or team name click the Search Button</h4>
+        <h4>If searching by team name, enter in full team name for best results.</h4>
+        <hr />
+
+        <script src="~/Scripts/App/search.js"></script>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SearchText, "Enter value to search for: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SearchText, new { htmlAttributes = new { @class = "form-control", @id = "SearchText", @autofocus = "autofocus" } })
+                @Html.ValidationMessageFor(model => model.SearchText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Search" class="btn btn-default" onclick="searchPlayers(SearchText.value)" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="playerList"></div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

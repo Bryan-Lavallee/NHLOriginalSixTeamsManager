@@ -1,0 +1,73 @@
+﻿@model Assignmnet9.Controllers.TeamTradeForm
+
+@{
+    ViewBag.Title = "TeamTrade";
+}
+
+<h2>Select Two Teams to Trade Between!</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Trade Between Two Teams: Select Two Teams and Select Players to Trade!</h4>
+        <hr />
+
+        <script src="~/Scripts/App/getPlayers.js"></script>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.TeamList, "Primary Trade Team", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TeamId", Model.TeamList, "Please Select a Team to Trade With", htmlAttributes: new { @class = "form-control", @size = 1, @placeholder="Please Select a Team to Trade With", onchange = @"getPlayers(this.value, 1)" })
+                @Html.ValidationMessageFor(model => model.TeamList, "", new { @class = "text-danger" })
+                
+            </div>
+        </div>
+
+        
+        <p>&nbsp;</p>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.TeamList, "Secondary Trade Team", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SecondTeamId", Model.TeamList, "Please Select a Team to Trade With", htmlAttributes: new { @class = "form-control", @size = 1, @id="secondTeam", @placeholder = "Please Select a Team to Trade With", onchange = @"getPlayers(this.value, 2);" })
+                @Html.ValidationMessageFor(model => model.TeamList, "", new { @class = "text -danger" })
+            </div>
+        </div>
+
+        <p>&nbsp;</p>
+
+        <div class="col-md-5"> 
+            <h2> Selected Team 1: </h2>
+
+            <div class="col-md-5" id="teamList1">
+            </div>
+        </div>
+
+   
+        <div class="col-md-5">
+            <h2> Selected Team 2:</h2>
+            <div class="col-md-5" id="teamList2">
+            </div>
+        </div>
+
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Trade" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
