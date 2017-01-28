@@ -10,18 +10,24 @@ The running application looks like:
 
 Home Screen:
 
+![image](https://cloud.githubusercontent.com/assets/22038862/22392797/6951af34-e4cb-11e6-84bb-4811474be55f.png)
+
 
 Team Index View:
 
+![image](https://cloud.githubusercontent.com/assets/22038862/22392803/7b003c50-e4cb-11e6-9466-e6112e328bcf.png)
 
 Player Index View:
 
+![image](https://cloud.githubusercontent.com/assets/22038862/22392807/81c12f0e-e4cb-11e6-9844-e06076e64131.png)
 
 Search Player Results:
 
+![image](https://cloud.githubusercontent.com/assets/22038862/22392817/8da555ac-e4cb-11e6-8749-dc705fd9e29f.png)
 
 Trade Screen:
 
+![image](https://cloud.githubusercontent.com/assets/22038862/22392820/95e6f27a-e4cb-11e6-8a69-f902695b47a8.png)
 
 
 Feel free to download and test for yourself! User authentication is required, but if you do not want to go to the hassle, you will just have to comment
